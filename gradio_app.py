@@ -21,13 +21,13 @@ Dont respond as an AI model in markdown, your answer should mimic that of an act
 Keep your answer concise (max 2 sentences). No preamble, start your answer right away please."""
 
 def process_inputs(audio_filepath, image_filepath):
-    # ✅ 1. Transcribe
+    
     speech_to_text_output = transcribe_with_groq(
         stt_model="whisper-large-v3",
         audio_filepath=audio_filepath
     )
 
-    # ✅ 2. Analyze Image
+    
     if image_filepath:
         encoded = encode_image(image_filepath)
         doctor_response = analyze_image_with_query(
@@ -38,13 +38,12 @@ def process_inputs(audio_filepath, image_filepath):
     else:
         doctor_response = "No image provided to analyze."
 
-    # ✅ 3. Convert response to speech
+    
     output_audio_path = "doctor_response.mp3"
     text_to_speech_with_gtts(doctor_response, output_audio_path)
 
     return speech_to_text_output, doctor_response, output_audio_path
 
-# ✅ Gradio Interface
 iface = gr.Interface(
     fn=process_inputs,
     inputs=[
@@ -59,5 +58,6 @@ iface = gr.Interface(
     title="🧠 AI Doctor with Vision and Voice",
     description="Speak your symptoms and upload a medical image. The AI doctor will listen, analyze, and reply with a voice."
 )
+
 
 iface.launch(debug=True, share=True)
