@@ -14,7 +14,7 @@ def text_to_speech_with_gtts(input_text, output_filepath="output.mp3"):
         tts = gTTS(text=input_text, lang="en", slow=False)
         tts.save(output_filepath)
     except Exception as e:
-        print(f"❌ TTS error: {e}")
+        print(f" TTS error: {e}")
         return
 
    
@@ -42,6 +42,7 @@ def text_to_speech_with_gtts(input_text, output_filepath="output.mp3"):
     except Exception as e:
         print(f"Audio playback error: {e}")
 
-# 🔊 Example usage
+#  Example usage
 if __name__ == "__main__":
     text_to_speech_with_gtts("Hello Prachi! This is your AI voice from gTTS.")
+
